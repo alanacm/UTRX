@@ -1,1 +1,1 @@
-# UTRX
+UTRX Smart Contract
