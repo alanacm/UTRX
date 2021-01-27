@@ -7,4 +7,5 @@ UTRX Smart Contract
 5) Only the fee logic is define for Advance Miner activity and fund will be used for project activity, marketing and development effort.
 
 **Please ensure there is at least 4-7 TRX to perform any interaction with contract.
+
 **Ensure deposit and withdrawal request is perform from application to ensure all incentivity and participation is recorded.
