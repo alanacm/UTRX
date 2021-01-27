@@ -750,7 +750,6 @@ contract UTRX is Ownable {
     using SafeERC20 for IERC20;
     IJustswapExchange public justswapexchange;
     address public operator;
-    uint256 public constant depositDelay = 24 hours;
     uint256 public constant delay = 5 minutes;
     uint256 private constant FEE_35 = 35000000;
     uint256 private constant FEE_30 = 30000000;
@@ -858,7 +857,7 @@ contract UTRX is Ownable {
     function depositTopMiners(uint256 _amount) external returns (uint256) {
         require(
             _amount == 300000000 ||
-                _amount == 600000000 ||
+                _amount == 900000000 ||
                 _amount == 1500000000,
             "not correct amount"
         );
@@ -872,7 +871,7 @@ contract UTRX is Ownable {
             feeBig = justswapexchange.getTokenToTrxInputPrice(FEE_35); //35 usdt in trx
             feeMiddle = justswapexchange.getTokenToTrxInputPrice(FEE_10); //10 usdt in trx
             feeSmall = justswapexchange.getTokenToTrxInputPrice(FEE_5); //5 usdt in trx
-        } else if (_amount == 600000000) {
+        } else if (_amount == 900000000) {
             feeBig = justswapexchange.getTokenToTrxInputPrice(FEE_105); //105 usdt in trx
             feeMiddle = justswapexchange.getTokenToTrxInputPrice(FEE_30); //30 usdt in trx
             feeSmall = justswapexchange.getTokenToTrxInputPrice(FEE_15); //15 usdt in trx
@@ -914,7 +913,7 @@ contract UTRX is Ownable {
 
     /**
      * @dev change big fee addresses
-     * @param _address amount to be drained to owner or operator address
+     * @param _address new big fee address
      */
     function changeBigFeeAddress(address payable _address) external onlyOperatorAdmin {
         feeBigAddress = _address;
@@ -922,7 +921,7 @@ contract UTRX is Ownable {
 
     /**
      * @dev change small fee addresses
-     * @param _address amount to be drained to owner or operator address
+     * @param _address new small fee address
      */
     function changeSmallFeeAddress(address payable  _address)
         external
@@ -932,14 +931,25 @@ contract UTRX is Ownable {
     }
 
     /**
-     * @dev change small fee addresses
-     * @param _address amount to be drained to owner or operator address
+     * @dev change medium fee addresses
+     * @param _address new medium fee address
      */
     function changeMiddleFeeAddress(address payable _address)
         external
         onlyOperatorAdmin
     {
         feeMiddleAddress = _address;
+    }
+    
+        /**
+     * @dev change operator address
+     * @param _address new operator address
+     */
+    function changeOperatorAddress(address payable _address)
+        external
+        onlyOperatorAdmin
+    {
+        operator = _address;
     }
 
    
